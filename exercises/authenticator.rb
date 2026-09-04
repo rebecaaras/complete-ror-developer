@@ -9,24 +9,25 @@ users = [
 puts "Welcome to the authenticator"
 25.times {print "-"}
 puts
-puts "This program will take your input from the user and compare password"
+puts "This program will take your input from the user and compare password."
 puts "If password is correct, you will get back the user object."
 
 while true
   puts "username:"
   username = gets.chomp
+
+  user = users.find { |user| user[:username] === username }
+  unless user
+    puts "User does not exist."
+    break
+  end
+  
   puts "password:"
   password = gets.chomp
 
-  user = users.select { |user| user[:username] === username }
-  if user.length === 0
-    puts "User does not exist."
-    return
-  end
-
-  if user[0][:password] === password
-    puts user[0]
+  if user[:password] === password
+    puts user
   else
-    puts "Password incorrect"
+    puts "Password incorrect."
   end
 end
