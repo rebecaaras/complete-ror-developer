@@ -15,7 +15,7 @@ class Authenticator
     puts "If password is correct, you will get back the user object."
 
     while attempts < 4
-      credentials = get_credentials
+      credentials = self.credentials
       authorization = auth_user(credentials[:username], credentials[:password])
       puts authorization
       attempts+=1
@@ -23,14 +23,14 @@ class Authenticator
   end
 
   def auth_user(username, password)
-    user = @users.find { |user| user[:username] === username }
-    if user&.[](:password) === password
+    user = @users.find { |user| user[:username] == username }
+    if user&.[](:password) == password
       return user
     end
     "Incorrect credentials"
   end
 
-  def get_credentials
+  def credentials
     print "username: "
     username = gets.chomp
     print "password: "
