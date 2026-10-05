@@ -27,4 +27,24 @@ RSpec.describe Auth do
       expect(described_class.verify_hash_digest(digest)).to eq(password)
     end
   end
+
+  describe '.create_secure_user' do
+    it 'should replace plain password with hashed password for an array of users' do
+      hashed_password = described_class.create_secure_users(users).first[:password]
+      expect(hashed_password).to be_a(BCrypt::Password)
+    end
+  end
+
+  describe '.authenticate_user' do
+    it 'should authenticate existing user' do
+      secure_users = described_class.create_secure_users(users)
+      user = secure_users.first
+      expect(described_class.authenticate_user( 'john', 'john-pwd', secure_users)).to eq(user)
+    end
+
+    it 'should not authenticate incorrect user' do
+      secure_users = described_class.create_secure_users(users)
+      expect(described_class.authenticate_user( 'mary', 'mary-pwd', secure_users)).to eq("Incorrect credentials")
+    end
+  end
 end
