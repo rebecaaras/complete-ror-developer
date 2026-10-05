@@ -4,7 +4,7 @@ The course is given in Rails 5 and 6, but I solved then while doing the necessar
 
 ## Topics covered include
 
-* Ruby fundamentals & Object-Oriented Programming
+* [Ruby fundamentals & Object-Oriented Programming](ruby-fundamentals-oop)
 * Rails MVC architecture
 * CRUD and ActiveRecord
 * Database associations
